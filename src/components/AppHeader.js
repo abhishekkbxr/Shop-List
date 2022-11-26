@@ -25,17 +25,37 @@ function AppHeader() {
         {" "}
         ADD shop
       </Button>
-      <SelectButton id="area" onChange={updateFilter} value={filterStatus}>
-        <option value="all">Fliter Area</option>
-        <option value="Thane">Thane</option>
-        <option value="Pune">Pune</option>
-        <option value="MumbaiSuburban">Mumbai Suburban</option>
-        <option value="Nashik">Nashik</option>
-        <option value="Nagpur">Nagpur</option>
-        <option value="Ahmednagar">Ahmednagar</option>
-        <option value="Solapur">Solapur</option>
-      </SelectButton>
-      <ShopModal type="add" modalOpen={modalOpen} setModalOpen={setModalOpen} />
+      <div>
+        {" "}
+        <SelectButton
+          style={{ marginRight: "8px" }}
+          id="area"
+          onChange={updateFilter}
+          value={filterStatus}
+        >
+          <option value="all">Fliter Category</option>
+          <option value="Grocery">Grocery</option>
+          <option value="Butcher">Butcher</option>
+          <option value="Baker">Baker</option>
+          <option value="Nashik">Chemist</option>
+          <option value="StationeryShop">Stationery shop</option>
+        </SelectButton>
+        <SelectButton id="area" onChange={updateFilter} value={filterStatus}>
+          <option value="all">Fliter Area</option>
+          <option value="Thane">Thane</option>
+          <option value="Pune">Pune</option>
+          <option value="MumbaiSuburban">Mumbai Suburban</option>
+          <option value="Nashik">Nashik</option>
+          <option value="Nagpur">Nagpur</option>
+          <option value="Ahmednagar">Ahmednagar</option>
+          <option value="Solapur">Solapur</option>
+        </SelectButton>
+        <ShopModal
+          type="add"
+          modalOpen={modalOpen}
+          setModalOpen={setModalOpen}
+        />
+      </div>
     </div>
   );
 }

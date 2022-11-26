@@ -58,9 +58,7 @@ function ShopList({ shop }) {
               <span className={styles.spanTitle}>Start Date:&nbsp;</span>{" "}
               {shop.endDate}
             </p>
-            {/* <p className={styles.time}>
-              {format(new Date(2014, 1, 11), "MM/dd/yyyy")}
-            </p> */}
+          
           </div>
         </div>
 
