@@ -6,30 +6,37 @@ import { useDispatch } from "react-redux";
 import { addShop, updateShop } from "../reducer/TodoReducer";
 import { v4 as uuid } from "uuid";
 import toast from "react-hot-toast";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 function ShopModal({ type, modalOpen, setModalOpen, shop }) {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [area, setArea] = useState("");
   const [category, setCategory] = useState("");
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState("");
 
-  useEffect(()=>{
-    if(type === "update" && shop ){
+  // console.log(format(startDate), "startdate");
+  // console.log(end ,"Enddate")
+
+  useEffect(() => {
+    if (type === "update" && shop) {
       setName(shop.name);
       setArea(shop.area);
-      setCategory(shop.category)
-    }else{
-      setName('');
-      setArea('');
-      setCategory('')
+      setCategory(shop.category);
+    } else {
+      setName("");
+      setArea("");
+      setCategory("");
     }
-  },[type , modalOpen , shop])
+  }, [type, modalOpen, shop]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (name && area && category) {
-      if (type == "add") {
+    if (name && area && category && startDate && endDate) {
+      if (type === "add") {
         dispatch(
           addShop({
             id: uuid(),
@@ -37,13 +44,14 @@ function ShopModal({ type, modalOpen, setModalOpen, shop }) {
             area,
             category,
             time: new Date().toLocaleString(),
+            startDate,
+            endDate,
           })
         );
 
         toast.success("Shop Added successfully");
-        
       }
-      if (type == "update") {
+      if (type === "update") {
         if (
           shop.name !== name ||
           shop.area !== area ||
@@ -55,6 +63,8 @@ function ShopModal({ type, modalOpen, setModalOpen, shop }) {
               name,
               area,
               category,
+              startDate,
+              endDate,
             })
           );
           toast.success("Shop Updated successfully");
@@ -102,6 +112,7 @@ function ShopModal({ type, modalOpen, setModalOpen, shop }) {
                 value={area}
                 onChange={(e) => setArea(e.target.value)}
               >
+                <option value="">Area of shop</option>
                 <option value="Thane">Thane</option>
                 <option value="Pune">Pune</option>
                 <option value="MumbaiSuburban">Mumbai Suburban</option>
@@ -119,12 +130,27 @@ function ShopModal({ type, modalOpen, setModalOpen, shop }) {
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
               >
+                <option value="">Category of shop</option>
                 <option value="Grocery">Grocery</option>
                 <option value="Butcher">Butcher</option>
                 <option value="Baker">Baker</option>
                 <option value="Nashik">Chemist</option>
                 <option value="StationeryShop">Stationery shop</option>
               </select>
+            </label>
+            <label htmlFor="title">
+              Start Date
+              <DatePicker
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+              />
+            </label>
+            <label htmlFor="title">
+              End Date
+              <DatePicker
+                selected={endDate}
+                onChange={(date) => setEndDate(date)}
+              />
             </label>
 
             <div className={styles.buttonContainer}>
